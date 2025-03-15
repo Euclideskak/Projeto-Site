@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Aviso Importante </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            border-radius: 100px;
+        }
+        .aviso-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            border-radius: 100px;
+        }
+        .aviso-container h1 {
+            color: #ff0000;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-radius: 100px;
+        }
+        .aviso-container p {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 100px;
+
+        }
+        .aviso-container button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border-radius: 100px;
+        }
+        .aviso-container button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="aviso-container">
+        <h1>Aviso Importante!</h1>
+        <p>Este é um aviso importante. Por favor, leia atentamente antes de prosseguir.</p>
+        <button onclick="fecharAviso()">Entendi</button>
+    </div>
+
+    <script>
+        function fecharAviso() {
+            alert("Aviso fechado! Continue com cuidado.");
+            // Aqui você pode adicionar a lógica para fechar ou remover o aviso
+        }
+    </script>
+</body>
+</html>

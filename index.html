@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Farmácia</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS atualizado -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Remove o botão de adicionar ao carrinho das categorias desejadas
+            const categoriasRemover = [
+                "Medicamentos",
+                "Cuidados com a Pele",
+                "Produtos de Higiene",
+            ];
+            const cards = document.querySelectorAll(".product-card");
+
+            cards.forEach((card) => {
+                const titulo = card.querySelector(".card-title").innerText;
+                if (categoriasRemover.includes(titulo)) {
+                    const botao = card.querySelector(".btn-primary");
+                    if (botao) {
+                        botao.remove();
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!localStorage.getItem("avisoPopupShown")) {
+                const avisoModalHTML = `
+                    <div class="modal fade" id="avisoModal" tabindex="-1" aria-labelledby="avisoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="border: 3px solid #28a745; border-radius: 10px; background-color: #1c1c1c; color: #d1d1d1;">
+                                <div class="modal-header" style="background-color: #2e2e2e; color: #28a745;">
+                                    <h5 class="modal-title" id="avisoModalLabel">⚠️ Aviso Importante</h5>
+                                </div>
+                                <div class="modal-body" style="background-color: #2b2b2b; color: #d1d1d1;">
+                                    <p style="font-size: 0.8em; font-weight: bold;">
+                                        Este site possui caráter exclusivamente educativo.<br>
+                                        Para maior transparência, destacamos os seguintes pontos:<br><br>
+
+                                        <strong>Conteúdo:</strong> O material presente neste site não é de minha autoria. Ele foi coletado de outras fontes disponíveis na internet.<br>
+                                        <strong>Valores:</strong> Os valores exibidos (se houver) são apenas ilustrativos e podem não corresponder à realidade atual.<br>
+                                        <strong>Imagens:</strong> Todas as imagens utilizadas foram obtidas de terceiros e podem não representar fielmente o contexto apresentado.<br>
+                                        <strong>Responsabilidade:</strong> Não assumo responsabilidade por possíveis imprecisões ou interpretações incorretas derivadas do uso do conteúdo.<br><br>
+
+                                        Agradecemos pela compreensão e reforçamos que o propósito deste site é meramente educacional.
+                                    </p>
+                                    <p style="font-size: 1.1em; font-weight: bold; color: #28a745;">Deseja continuar?</p>
+                                </div>
+                                <div class="modal-footer" style="background-color: #2e2e2e;">
+                                    <button id="continueButton" type="button" class="btn btn-outline-success btn-lg">Sim, continuar</button>
+                                    <button id="exitButton" type="button" class="btn btn-outline-danger btn-lg">Não, sair</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                document.body.insertAdjacentHTML("beforeend", avisoModalHTML);
+                $("#avisoModal").modal("show");
+                document
+                    .getElementById("continueButton")
+                    .addEventListener("click", function () {
+                        localStorage.setItem("avisoPopupShown", "true");
+                        $("#avisoModal").modal("hide");
+                    });
+                document
+                    .getElementById("exitButton")
+                    .addEventListener("click", function () {
+                        window.location.href = "https://www.google.com";
+                    });
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #121212; /* Fundo do site igual ao fundo do conteúdo */
+            color: #d1d1d1; /* Cor principal do texto */
+        }
+
+        .navbar,
+        .footer,
+        .card,
+        .modal-content {
+            background-color: #1e1e1e; /* Fundo do cabeçalho e rodapé */
+            color: #d1d1d1;
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .footer p,
+        .footer a,
+        .card-title,
+        .card-text {
+            color: #d1d1d1 !important; /* Texto principal */
+        }
+
+        .product-card {
+            margin: 20px 0;
+            border: 1px solid #28a745; /* Borda verde */
+        }
+
+        .card-img-top {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .carousel-item img {
+            height: auto;
+            max-height: 400px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .footer {
+    width: 100%; /* Garante que o rodapé ocupe toda a largura da tela */
+    padding: 20px 0; /* Espaçamento superior e inferior */
+    background-color: #2e2e2e; /* Cor do fundo do rodapé */
+    color: #d1d1d1; /* Cor do texto */
+    text-align: center;
+}
+
+
+        .custom-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px ;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            background-color: #45a049;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: green; border-radius: 20px;">
+        <a class="navbar-brand" href="#" style="font-family: Arial, sans-serif;">Farmácia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html" style="font-family: Arial, sans-serif;">Início <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="produtos.html" style="font-family: Arial, sans-serif;">Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contatos.html" style="font-family: Arial, sans-serif;">Contato</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="carrinho de compras.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        Carrinho
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<br>
+    <!-- Carrossel de Promoções -->
+    <div id="promoCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://precopopular.vtexassets.com/assets/vtex.file-manager-graphql/images/a46b2d96-32b9-4216-b622-7577c91671e9___727ac06a935f6c9bd265d7444d8d270c.jpg"
+                    class="d-block w-100" alt="Promoção 1" />
+            </div>
+            <div class="carousel-item">
+                <img src="https://farmaciaartesanal.vteximg.com.br/arquivos/ids/159344/2-banner%20mobile%20-%2035-em-produtos-selecionados.png?v=638684034863400000"
+                    class="d-block w-100" alt="Promoção 2" />
+            </div>
+            <div class="carousel-item">
+                <img src="https://precopopular.vtexassets.com/assets/vtex.file-manager-graphql/images/20c5ff24-ca34-4676-b3ee-31d0106fb827___cd4976f470715f6f52fcb744c50bbc24.png"
+                    class="d-block w-100" alt="Promoção 3" />
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#promoCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#promoCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 class="my-4 text-center">Nossas Ofertas</h1>
+
+        <div class="row">
+            <div class="col-md-4 product-card" style="border-radius: 60px;">
+                <div class="card" style="border-radius: 60px;">
+                    <img src="https://s2.glbimg.com/864Wg2k8AWRnSRwu0VQFd9fLZY4=/e.glbimg.com/og/ed/f/original/2020/07/12/produtos.jpg"
+                        class="card-img-top" alt="Produto 1"  style="border-radius: 60px;"/>
+                    <div class="card-body">
+                        <h5 class="card-title">Produtos de Higiene</h5>
+                        <p class="card-text">
+                            Variedade de produtos de higiene pessoal. Ideal para cuidados
+                            diários.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 product-card" style="border-radius: 60px; ">
+                <div class="card" style="border-radius: 60px; ">
+                    <img src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.1085032:1590180219/image/image.jpg?f=16x9&$p$f=3965716"
+                        class="card-img-top" alt="Produto 2"  style="border-radius: 60px; "/>
+                    <div class="card-body">
+                        <h5 class="card-title">Cuidados com a Pele</h5>
+                        <p class="card-text">
+                            Creme para pele seca, sabonete líquido e mais. Cuide-se com
+                            qualidade!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 product-card" style="border-radius: 60px; ">
+                <div class="card" style="border-radius: 60px; ">
+                    <img src="https://imagens.ebc.com.br/5-GneBG0p6ZC1qLSIbO-TM2gSnE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/atoms/image/genericos.jpg?itok=oLkux69P"
+                        class="card-img-top" alt="Produto 3"  style="border-radius: 60px; "/>
+                    <div class="card-body">
+                        <h5 class="card-title">Medicamentos</h5>
+                        <p class="card-text">
+                            Os melhores medicamentos para alívio e cura. Consulte sempre seu
+                            médico.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Novas seções -->
+        <h1 class="my-4 text-center">Nossos Serviços</h1>
+        <div class="row">
+            <div class="col-md-4 service-card">
+                <div class="card text-center" style="border-radius: 50px; border: 1px solid green;">
+                    <div class="card-body">
+                        <h5 class="card-title">Entrega Rápida</h5>
+                        <p class="card-text">
+                            Receba seus produtos em casa com rapidez e segurança.
+                        </p>
+                        <a href="Entrega rapida.html" class="custom-button" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 service-card">
+                <div class="card text-center" style="border-radius: 50px; border: 1px solid green;">
+                    <div class="card-body">
+                        <h5 class="card-title">Consultoria Farmacêutica</h5>
+                        <p class="card-text">
+                            Tire suas dúvidas sobre medicamentos e cuidados com a saúde.
+                        </p>
+                        <a href="Consultoria Farmacêutica.html" class="custom-button" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 service-card">
+                <div class="card text-center" style="border-radius: 50px; border: 1px solid green;">
+                    <div class="card-body">
+                        <h5 class="card-title">Promoções Especiais</h5>
+                        <p class="card-text">
+                            Fique atento às nossas promoções mensais e economize.
+                        </p>
+                        <a href="https://seusite.com/promocoes" class="custom-button" target="_blank">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br><br><br>
+        <footer class="footer text-center" style="background: #121212;">
+            <div class="container" style="background: #121212;">
+                <p class="mb-0">Desenvolvido por <strong>Euclides Fernando Montilha de Mello</strong></p>
+                <p>© 2023 Todos os direitos reservados.</p>
+                <p>
+                    <a href="#" style="color: white;">Política de Privacidade</a> | 
+                    <a href="#" style="color: white;">Termos de Serviço</a>
+                </p>
+            </div>
+        </footer>
+
+    <!-- Scripts atualizados -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js compatível com Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Bootstrap JS atualizado -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
